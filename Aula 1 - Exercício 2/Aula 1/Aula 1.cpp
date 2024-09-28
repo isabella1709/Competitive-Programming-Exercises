@@ -50,8 +50,8 @@ int main(int argc, char* argv[]) {
     cin >> n >> t;
 
     vi humidity; vvi adjustments; 
-    auto readTask1 = async(launch::async,  read_vi, ref(humidity, n)); //apenas um teste de async
-    auto readTask2 = async(launch::async, read_vvi, ref(adjustments, t)); //apenas um teste de async
+    auto readTask1 = async(launch::async, read_vi, ref(humidity), n);  // teste async
+    auto readTask2 = async(launch::async, read_vvi, ref(adjustments), t);  // teste async
 
     readTask1.wait();
     readTask2.wait();
