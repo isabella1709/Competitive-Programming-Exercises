@@ -1,20 +1,73 @@
-// Exercício Caracteres Duplicados.cpp : Este arquivo contém a função 'main'. A execução do programa começa e termina ali.
-//
-
+#include <iostream>   // Biblioteca para operações de entrada e saída padrão
+#include <fstream>    // Biblioteca para operações de leitura e escrita em arquivos
+#include <vector>     // Biblioteca para utilizar a estrutura de dados vector
+#include <string>     // Biblioteca para manipulação de strings
+#include <algorithm>  // Biblioteca para algoritmos padrão, como sort
+#include <random>     // Biblioteca para geração de números aleatórios
+#include <chrono>     // Biblioteca para manipulação de tempo e relógio de alta resolução
+#include <execution>
 #include <iostream>
+#include <future>
+#include <vector>
+#include <unordered_set>
+#define FAST_IO std::ios::sync_with_stdio(false); std::cin.tie(nullptr);
 
-int main()
-{
-    std::cout << "Hello World!\n";
+using namespace std;
+using vi = vector<int>;
+using vvi = vector<vector<int>>;
+using vvs = vector<char>;
+using vll = vector<long long>;
+using exec_seq = execution::sequenced_policy;
+
+void print_vector(const vll& vec) {
+    for (size_t i = 0; i < vec.size(); ++i) {
+        cout << vec[i] << " ";
+    }
+    cout << endl;
 }
 
-// Executar programa: Ctrl + F5 ou Menu Depurar > Iniciar Sem Depuração
-// Depurar programa: F5 ou menu Depurar > Iniciar Depuração
+void read_vector(vvs& vec, char n) {
+    if (n > 0) vec.reserve(static_cast<size_t>(n));
+    for (int i = 0; i < n; ++i) {
+        char x;
+        cin >> x;
+        vec.push_back(x);
+    }
+}
 
-// Dicas para Começar: 
-//   1. Use a janela do Gerenciador de Soluções para adicionar/gerenciar arquivos
-//   2. Use a janela do Team Explorer para conectar-se ao controle do código-fonte
-//   3. Use a janela de Saída para ver mensagens de saída do build e outras mensagens
-//   4. Use a janela Lista de Erros para exibir erros
-//   5. Ir Para o Projeto > Adicionar Novo Item para criar novos arquivos de código, ou Projeto > Adicionar Item Existente para adicionar arquivos de código existentes ao projeto
-//   6. No futuro, para abrir este projeto novamente, vá para Arquivo > Abrir > Projeto e selecione o arquivo. sln
+void read_vvi(vvi& vecs, int n) {
+    int index1, index2;
+
+    for (int i = 0; i < n; i++) {
+        vi vec;
+        cin >> index1 >> index2;
+        vec.push_back(index1); vec.push_back(index2);
+        vecs.push_back(vec);
+    }
+}
+
+int main(int argc, char* argv[]) {
+    FAST_IO;
+
+    int n;
+
+    cin >> n;
+
+    vvs word; vvs results;
+
+    read_vector(word, n);
+
+    unordered_set<char> letters;
+
+    for (auto w : word) {
+        if (letters.insert(w).second) {
+            results.push_back(w);
+        }
+    }
+
+    for (auto r : results) {
+        cout << r << " ";
+    }
+
+    return 0;
+}
